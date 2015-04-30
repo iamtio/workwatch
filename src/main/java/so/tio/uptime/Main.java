@@ -15,7 +15,7 @@ public class Main {
 
     }
 }
-
+// TODO: Get work time by API from work calendar at http://basicdata.ru/api/json/calend/
 class TrayText {
     private SystemTray systemTray;
     private TrayIcon icon = null;
