@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         TrayText tx = new TrayText();
         int last = 0;
+        tx.initTray();
         while (!tx.wantExit()) {
             if(tx.getRemainFlag()) {
                 if(last != UptimeGetter.getRemainHours())
@@ -30,7 +31,7 @@ public class Main {
 class TrayText {
     private SystemTray systemTray;
     private TrayIcon icon = null;
-    private SettingsManager sm = new SettingsManager(".uptime.properties");
+    private SettingsManager sm;
     private boolean wantExit = false;
 
     class SystemTrayNotSupported extends Error {
