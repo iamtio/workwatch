@@ -35,6 +35,8 @@ class TrayText {
             System.err.println("SystemTray is not supported by your system");
             throw new SystemTrayNotSupported();
         }
+        String homeDir = System.getProperty("user.home");
+        sm = new SettingsManager(new File(homeDir, ".uptime.properties").toString());
         this.systemTray = SystemTray.getSystemTray();
     }
 
