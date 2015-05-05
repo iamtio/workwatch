@@ -1,7 +1,5 @@
 package so.tio.uptime;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,11 +12,15 @@ import java.util.Properties;
 public class Main {
     public static void main(String[] args) throws Exception {
         TrayText tx = new TrayText();
-        while (true) {
-            tx.updateTray(UptimeGetter.getRemainHours());
-            Thread.sleep(5000);
+        while (!tx.wantExit()) {
+            if(tx.getRemainFlag()) {
+                tx.updateTray(UptimeGetter.getRemainHours());
+            }else{
+                tx.updateTray(UptimeGetter.getUptimeHours());
+            }
+            Thread.sleep(200);
         }
-
+        System.exit(0);
     }
 }
 
@@ -26,6 +28,7 @@ class TrayText {
     private SystemTray systemTray;
     private TrayIcon icon = null;
     private SettingsManager sm = new SettingsManager(".uptime.properties");
+    private boolean wantExit = false;
 
     class SystemTrayNotSupported extends Error {
     }
@@ -40,6 +43,13 @@ class TrayText {
         this.systemTray = SystemTray.getSystemTray();
     }
 
+    boolean getRemainFlag(){
+        return sm.getRemainFlag();
+    }
+
+    boolean wantExit(){
+        return wantExit;
+    }
     private PopupMenu getMenu(){
         PopupMenu menu = new PopupMenu();
         MenuItem exit = new MenuItem("Exit");
@@ -47,10 +57,10 @@ class TrayText {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sm.save();
-                System.exit(0);
+                wantExit = true;
             }
         });
-        CheckboxMenuItem isRemain = new CheckboxMenuItem("Show remain instead uptime", sm.showRemainFlag());
+        CheckboxMenuItem isRemain = new CheckboxMenuItem("Show remain instead uptime", sm.getRemainFlag());
         isRemain.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -124,7 +134,7 @@ class SettingsManager {
         }
     }
 
-    boolean showRemainFlag(){
+    boolean getRemainFlag(){
         return properties.getProperty("showRemain", Boolean.toString(false)).equals(Boolean.toString(true));
     }
 
