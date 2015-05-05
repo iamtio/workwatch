@@ -46,15 +46,17 @@ class TrayText {
     void updateTray(int hours) throws AWTException {
         updateTray(Integer.toString(hours));
     }
+    void initTray() throws AWTException{
+        this.icon = new TrayIcon(TextImageBuilder.buildImage("0"));
+        this.icon.setPopupMenu(this.getMenu());
+        this.systemTray.add(this.icon);
+    }
 
     void updateTray(String hours) throws AWTException {
-        if (this.icon != null) {
-            this.systemTray.remove(this.icon);
-            this.icon = null;
-        }
         Image trayImage = TextImageBuilder.buildImage(hours);
-        this.icon = new TrayIcon(trayImage, null, this.getMenu());
-        this.systemTray.add(this.icon);
+        if(this.icon == null)
+            initTray();
+        this.icon.setImage(trayImage);
     }
 }
 
