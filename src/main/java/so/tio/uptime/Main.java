@@ -1,9 +1,15 @@
 package so.tio.uptime;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.Properties;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -15,10 +21,11 @@ public class Main {
 
     }
 }
-// TODO: Get work time by API from work calendar at http://basicdata.ru/api/json/calend/
+
 class TrayText {
     private SystemTray systemTray;
     private TrayIcon icon = null;
+    private SettingsManager sm = new SettingsManager(".uptime.properties");
 
     class SystemTrayNotSupported extends Error {
     }
@@ -37,9 +44,19 @@ class TrayText {
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                sm.save();
                 System.exit(0);
             }
         });
+        CheckboxMenuItem isRemain = new CheckboxMenuItem("Show remain instead uptime", sm.showRemainFlag());
+        isRemain.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                sm.setRemainFlag(e.getStateChange() == ItemEvent.SELECTED);
+            }
+        });
+        menu.add(isRemain);
+        menu.addSeparator();
         menu.add(exit);
         return menu;
     }
@@ -88,5 +105,37 @@ class TextImageBuilder {
         graphics.drawString(text, 3, 16);
         graphics.dispose();
         return image;
+    }
+}
+
+class SettingsManager {
+    private Properties properties = new Properties();
+    private File file;
+
+    SettingsManager(String fileName){
+        try {
+            file = new File(fileName);
+            properties.load(new FileInputStream(file));
+        } catch (FileNotFoundException ignored) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    boolean showRemainFlag(){
+        return properties.getProperty("showRemain", Boolean.toString(false)).equals(Boolean.toString(true));
+    }
+
+    void setRemainFlag(boolean flag){
+        properties.setProperty("showRemain", Boolean.toString(flag));
+    }
+    void save(){
+        try {
+            properties.store(new FileOutputStream(file), null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
