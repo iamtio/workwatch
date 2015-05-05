@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         TrayText tx = new TrayText();
         while (true) {
-            tx.updateTray(UptimeGetter.getUptimeHours());
+            tx.updateTray(UptimeGetter.getRemainHours());
             Thread.sleep(5000);
         }
 
@@ -29,8 +29,8 @@ class TrayText {
             throw new SystemTrayNotSupported();
         }
         this.systemTray = SystemTray.getSystemTray();
-
     }
+
     private PopupMenu getMenu(){
         PopupMenu menu = new PopupMenu();
         MenuItem exit = new MenuItem("Exit");
@@ -43,17 +43,15 @@ class TrayText {
         menu.add(exit);
         return menu;
     }
-    void updateTray(int hours) throws AWTException {
-        updateTray(Integer.toString(hours));
-    }
+
     void initTray() throws AWTException{
         this.icon = new TrayIcon(TextImageBuilder.buildImage("0"));
         this.icon.setPopupMenu(this.getMenu());
         this.systemTray.add(this.icon);
     }
 
-    void updateTray(String hours) throws AWTException {
-        Image trayImage = TextImageBuilder.buildImage(hours);
+    void updateTray(int hours) throws AWTException {
+        Image trayImage = TextImageBuilder.buildImage(Integer.toString(hours));
         if(this.icon == null)
             initTray();
         this.icon.setImage(trayImage);
@@ -62,11 +60,15 @@ class TrayText {
 
 class UptimeGetter {
     static int getUptimeHours() {
-        return getUptimeHours(8);
+        return (int)(System.nanoTime() / 1000 / 1000 / 1000 / 60 / 60);
     }
 
-    static int getUptimeHours(int workTime) {
-        return (int) (workTime - System.nanoTime() / 1000 / 1000 / 1000 / 60 / 60);
+    static int getRemainHours() {
+        return getRemainHours(8);
+    }
+
+    static int getRemainHours(int workTime) {
+        return workTime - getUptimeHours();
     }
 }
 
@@ -76,10 +78,11 @@ class TextImageBuilder {
 
         Graphics graphics = image.getGraphics();
 
-        // TODO: Use transparent color
+        // Transparent background
         graphics.setColor(new Color(0, true));
         graphics.fillRect(0, 0, 32, 32);
 
+        // Writing text
         graphics.setColor(Color.DARK_GRAY);
         graphics.setFont(new Font("Arial", Font.PLAIN, 14));
         graphics.drawString(text, 3, 16);
