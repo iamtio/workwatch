@@ -12,11 +12,14 @@ import java.util.Properties;
 public class Main {
     public static void main(String[] args) throws Exception {
         TrayText tx = new TrayText();
+        int last = 0;
         while (!tx.wantExit()) {
             if(tx.getRemainFlag()) {
-                tx.updateTray(UptimeGetter.getRemainHours());
+                if(last != UptimeGetter.getRemainHours())
+                    tx.updateTray(last = UptimeGetter.getRemainHours());
             }else{
-                tx.updateTray(UptimeGetter.getUptimeHours());
+                if(last != UptimeGetter.getUptimeHours())
+                    tx.updateTray(last = UptimeGetter.getUptimeHours());
             }
             Thread.sleep(200);
         }
@@ -50,6 +53,7 @@ class TrayText {
     boolean wantExit(){
         return wantExit;
     }
+
     private PopupMenu getMenu(){
         PopupMenu menu = new PopupMenu();
         MenuItem exit = new MenuItem("Exit");
