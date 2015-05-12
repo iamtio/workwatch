@@ -97,6 +97,11 @@ class UptimeGetter {
         return (int)(System.nanoTime() / 1000 / 1000 / 1000 / 60 / 60);
     }
 
+    static CountedTime getUptime(){
+        int minutes = (int)(System.nanoTime() / 1000 / 1000 / 1000 / 60);
+        return new CountedTime(minutes);
+    }
+
     static int getRemainHours() {
         return getRemainHours(8);
     }
