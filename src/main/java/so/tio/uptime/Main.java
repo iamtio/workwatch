@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Properties;
 
@@ -76,13 +75,13 @@ class TrayText {
     }
 
     void initTray() throws AWTException{
-        this.icon = new TrayIcon(TextImageBuilder.buildImage("0"));
+        this.icon = new TrayIcon(new CountedTime(0).toImage());
         this.icon.setPopupMenu(this.getMenu());
         this.systemTray.add(this.icon);
     }
 
     void updateTray(CountedTime time) throws AWTException {
-        Image trayImage = TextImageBuilder.buildImage(time.toString());
+        Image trayImage = time.toImage();
         if(this.icon == null)
             initTray();
         this.icon.setImage(trayImage);
@@ -97,25 +96,6 @@ class UptimeGetter {
 
     static CountedTime getRemain(){
         return new CountedTime(8 * 60).minus(getUptime());
-    }
-}
-
-class TextImageBuilder {
-    static Image buildImage(String text) {
-        Image image = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
-
-        Graphics graphics = image.getGraphics();
-
-        // Transparent background
-        graphics.setColor(new Color(0, true));
-        graphics.fillRect(0, 0, 32, 32);
-
-        // Writing text
-        graphics.setColor(Color.DARK_GRAY);
-        graphics.setFont(new Font("Arial", Font.PLAIN, 10));
-        graphics.drawString(text, 1, 16);
-        graphics.dispose();
-        return image;
     }
 }
 
