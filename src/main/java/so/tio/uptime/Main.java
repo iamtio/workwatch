@@ -12,15 +12,12 @@ import java.util.Properties;
 public class Main {
     public static void main(String[] args) throws Exception {
         TrayText tx = new TrayText();
-        int last = 0;
         tx.initTray();
         while (!tx.wantExit()) {
             if(tx.getRemainFlag()) {
-                if(last != UptimeGetter.getRemainHours())
-                    tx.updateTray(last = UptimeGetter.getRemainHours());
+                tx.updateTray(UptimeGetter.getRemain());
             }else{
-                if(last != UptimeGetter.getUptimeHours())
-                    tx.updateTray(last = UptimeGetter.getUptimeHours());
+                tx.updateTray(UptimeGetter.getUptime());
             }
             Thread.sleep(200);
         }
@@ -84,8 +81,8 @@ class TrayText {
         this.systemTray.add(this.icon);
     }
 
-    void updateTray(int hours) throws AWTException {
-        Image trayImage = TextImageBuilder.buildImage(Integer.toString(hours));
+    void updateTray(CountedTime time) throws AWTException {
+        Image trayImage = TextImageBuilder.buildImage(time.toString());
         if(this.icon == null)
             initTray();
         this.icon.setImage(trayImage);
@@ -93,21 +90,13 @@ class TrayText {
 }
 
 class UptimeGetter {
-    static int getUptimeHours() {
-        return (int)(System.nanoTime() / 1000 / 1000 / 1000 / 60 / 60);
-    }
-
     static CountedTime getUptime(){
         int minutes = (int)(System.nanoTime() / 1000 / 1000 / 1000 / 60);
         return new CountedTime(minutes);
     }
 
-    static int getRemainHours() {
-        return getRemainHours(8);
-    }
-
-    static int getRemainHours(int workTime) {
-        return workTime - getUptimeHours();
+    static CountedTime getRemain(){
+        return new CountedTime(8 * 60).minus(getUptime());
     }
 }
 
@@ -123,8 +112,8 @@ class TextImageBuilder {
 
         // Writing text
         graphics.setColor(Color.DARK_GRAY);
-        graphics.setFont(new Font("Arial", Font.PLAIN, 14));
-        graphics.drawString(text, 3, 16);
+        graphics.setFont(new Font("Arial", Font.PLAIN, 10));
+        graphics.drawString(text, 1, 16);
         graphics.dispose();
         return image;
     }

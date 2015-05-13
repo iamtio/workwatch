@@ -1,39 +1,34 @@
 package so.tio.uptime;
 
 public class CountedTime{
-    private int hours = 0;
-    private int minutes = 0;
-
-    CountedTime(int hours, int minutes){
-        this.hours = hours;
-        this.minutes = minutes;
-    }
+    private int fullMinutes = 0;
 
     CountedTime(int minutes){
-        for(;minutes >= 60; minutes-=60){
-            this.hours += 1;
-        }
-        this.minutes = minutes;
+        this.fullMinutes = minutes;
     }
 
     @Override
     public String toString() {
-        return String.format("%d:%02d", hours, minutes);
+        return String.format("%d:%02d", this.getHours(), this.getMinutes());
     }
 
     public int getHours() {
-        return hours;
-    }
-
-    public void setHours(int hours) {
-        this.hours = hours;
+        return fullMinutes / 60;
     }
 
     public int getMinutes() {
-        return minutes;
+        return fullMinutes % 60;
     }
 
-    public void setMinutes(int minutes) {
-        this.minutes = minutes;
+    public int getFullMinutes() {
+        return fullMinutes;
+    }
+
+    public void setFullMinutes(int minutes) {
+        this.fullMinutes = minutes;
+    }
+
+    public CountedTime minus(CountedTime another) {
+        return new CountedTime(this.getFullMinutes() - another.getFullMinutes());
     }
 }
