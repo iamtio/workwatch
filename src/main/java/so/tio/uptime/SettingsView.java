@@ -33,6 +33,8 @@ public class SettingsView extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Color textColor = JColorChooser.showDialog(textColorButton, "Choose text Color", null);
+                if(textColor == null)
+                    return;
                 sm.setTextColor(textColor);
                 textColorPanel.setBackground(textColor);
             }
@@ -40,9 +42,11 @@ public class SettingsView extends JDialog {
         backgroundColorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Color textColor = JColorChooser.showDialog(backgroundColorButton, "Choose Background Color", null);
-                sm.setBackgroundColor(textColor);
-                backgroundColorPanel.setBackground(textColor);
+                Color bgColor = JColorChooser.showDialog(backgroundColorButton, "Choose Background Color", null);
+                if(bgColor == null)
+                    return;
+                sm.setBackgroundColor(bgColor);
+                backgroundColorPanel.setBackground(bgColor);
             }
         });
     }
