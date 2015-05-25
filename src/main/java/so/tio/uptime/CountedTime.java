@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class CountedTime{
     private int fullMinutes = 0;
+    private SettingsManager sm = SettingsManagerFacility.getSettingsManager();
 
     CountedTime(int minutes){
         this.fullMinutes = minutes;
@@ -21,10 +22,10 @@ public class CountedTime{
         Graphics graphics = image.getGraphics();
 
         // Transparent background
-        graphics.setColor(new Color(0, true));
+        graphics.setColor(sm.getBackgroundColor());
         graphics.fillRect(0, 0, 32, 32);
 
-        graphics.setColor(Color.DARK_GRAY);
+        graphics.setColor(sm.getTextColor());
         graphics.setFont(new Font("Arial", Font.PLAIN, 12));
 
         graphics.drawString(String.format("%d", this.getHours()), 1, 10);
