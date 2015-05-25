@@ -24,10 +24,6 @@ public class TrayManager {
         this.systemTray = SystemTray.getSystemTray();
     }
 
-    boolean getRemainFlag(){
-        return sm.getRemainFlag();
-    }
-
     boolean wantExit(){
         return wantExit;
     }

@@ -53,6 +53,14 @@ public class SettingsManager {
         this.save();
     }
 
+    int getWorkingTime(){
+        return Integer.valueOf(properties.getProperty("workingTime", "8"));
+    }
+
+    void setWorkingTime(int hours){
+        properties.setProperty("workingTime", String.valueOf(hours));
+    }
+
     void save(){
         try {
             properties.store(new FileOutputStream(file), null);
