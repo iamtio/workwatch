@@ -22,7 +22,7 @@ public class TrayManager {
             throw new SystemTrayNotSupported();
         }
         String homeDir = System.getProperty("user.home");
-        sm = new SettingsManager(new File(homeDir, ".uptime.properties").toString());
+        sm = SettingsManagerFacility.getSettingsManager();
         this.systemTray = SystemTray.getSystemTray();
     }
 
@@ -40,7 +40,6 @@ public class TrayManager {
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                sm.save();
                 wantExit = true;
             }
         });
@@ -51,8 +50,18 @@ public class TrayManager {
                 sm.setRemainFlag(e.getStateChange() == ItemEvent.SELECTED);
             }
         });
+        MenuItem settings = new MenuItem("Settings");
+        settings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SettingsView dialog = new SettingsView();
+                dialog.pack();
+                dialog.setVisible(true);
+            }
+        });
         menu.add(isRemain);
         menu.addSeparator();
+        menu.add(settings);
         menu.add(exit);
         return menu;
     }
