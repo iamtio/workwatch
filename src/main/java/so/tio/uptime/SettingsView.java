@@ -15,6 +15,8 @@ public class SettingsView extends JDialog {
     private JButton backgroundColorButton;
     private JPanel backgroundColorPanel;
     private JPanel textColorPanel;
+    private JRadioButton uptimeRadioButton;
+    private JRadioButton remainRadioButton;
     private SettingsManager sm = SettingsManagerFacility.getSettingsManager();
 
     public SettingsView() {
@@ -22,15 +24,38 @@ public class SettingsView extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonClose);
 
+        // Setting up controls from config
         backgroundColorPanel.setBackground(sm.getBackgroundColor());
         textColorPanel.setBackground(sm.getTextColor());
         workingHoursSpinner.setValue(sm.getWorkingTime());
+        switch (sm.getMode()){
+            case Uptime:
+                uptimeRadioButton.setSelected(true);
+                break;
+            case Remain:
+                remainRadioButton.setSelected(true);
+                break;
+        }
+
+        // Adding handlers to controls
         buttonClose.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
             }
         });
+
+        ActionListener modeClicked  = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sm.setMode(SettingsManager.Mode.valueOf(e.getActionCommand()));
+            }
+        };
+        uptimeRadioButton.setActionCommand(SettingsManager.Mode.Uptime.toString());
+        uptimeRadioButton.addActionListener(modeClicked);
+        remainRadioButton.setActionCommand(SettingsManager.Mode.Remain.toString());
+        remainRadioButton.addActionListener(modeClicked);
+
         textColorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

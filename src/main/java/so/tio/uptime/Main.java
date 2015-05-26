@@ -7,10 +7,13 @@ public class Main {
         tm.initTray();
 
         while (!tm.wantExit()) {
-            if(sm.getRemainFlag()) {
-                tm.updateTray(TimeGetter.getRemain());
-            }else{
-                tm.updateTray(TimeGetter.getUptime());
+            switch (sm.getMode()){
+                case Remain:
+                    tm.updateTray(TimeGetter.getRemain());
+                    break;
+                case Uptime:
+                    tm.updateTray(TimeGetter.getUptime());
+                    break;
             }
             Thread.sleep(200);
         }

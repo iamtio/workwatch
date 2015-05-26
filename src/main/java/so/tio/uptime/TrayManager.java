@@ -3,13 +3,10 @@ package so.tio.uptime;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 public class TrayManager {
     private SystemTray systemTray;
     private TrayIcon icon = null;
-    private SettingsManager sm;
     private boolean wantExit = false;
 
     class SystemTrayNotSupported extends Error {
@@ -20,7 +17,6 @@ public class TrayManager {
             System.err.println("SystemTray is not supported by your system");
             throw new SystemTrayNotSupported();
         }
-        sm = SettingsManagerFacility.getSettingsManager();
         this.systemTray = SystemTray.getSystemTray();
     }
 
@@ -37,14 +33,8 @@ public class TrayManager {
                 wantExit = true;
             }
         });
-        CheckboxMenuItem isRemain = new CheckboxMenuItem("Show remain instead uptime", sm.getRemainFlag());
-        isRemain.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                sm.setRemainFlag(e.getStateChange() == ItemEvent.SELECTED);
-            }
-        });
-        MenuItem settings = new MenuItem("Settings");
+
+        MenuItem settings = new MenuItem("Show settings");
         settings.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -53,9 +43,8 @@ public class TrayManager {
                 dialog.setVisible(true);
             }
         });
-        menu.add(isRemain);
-        menu.addSeparator();
         menu.add(settings);
+        menu.addSeparator();
         menu.add(exit);
         return menu;
     }

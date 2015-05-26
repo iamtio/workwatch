@@ -7,7 +7,7 @@ import java.util.Properties;
 public class SettingsManager {
     private Properties properties = new Properties();
     private File file;
-
+    public enum Mode {Uptime, Remain};
     SettingsManager(String fileName){
         try {
             file = new File(fileName);
@@ -26,12 +26,12 @@ public class SettingsManager {
         return Color.decode(col);
     }
 
-    boolean getRemainFlag(){
-        return properties.getProperty("showRemain", Boolean.toString(false)).equals(Boolean.toString(true));
+    Mode getMode(){
+        return Mode.valueOf(properties.getProperty("mode", Mode.Uptime.toString()));
     }
 
-    void setRemainFlag(boolean flag){
-        properties.setProperty("showRemain", Boolean.toString(flag));
+    void setMode(Mode m){
+        properties.setProperty("mode", m.toString());
         this.save();
     }
 
