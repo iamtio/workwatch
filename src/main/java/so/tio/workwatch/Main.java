@@ -1,4 +1,4 @@
-package so.tio.uptime;
+package so.tio.workwatch;
 
 public class Main {
     public static void main(String[] args) throws Exception {

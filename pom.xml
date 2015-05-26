@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>so.tio.uptime</groupId>
-    <artifactId>uptime</artifactId>
+    <groupId>so.tio.workwatch</groupId>
+    <artifactId>workwatch</artifactId>
     <version>1.0</version>
-    <name>Uptime tray app</name>
+    <name>Work watch timer</name>
     <packaging>jar</packaging>
 
     <properties>
@@ -27,7 +27,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>so.tio.uptime.Main</mainClass>
+                            <mainClass>so.tio.workwatch.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

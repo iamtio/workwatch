@@ -1,4 +1,4 @@
-package so.tio.uptime;
+package so.tio.workwatch;
 
 import java.awt.*;
 import java.io.*;

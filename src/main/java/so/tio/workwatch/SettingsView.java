@@ -1,4 +1,4 @@
-package so.tio.uptime;
+package so.tio.workwatch;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
