@@ -7,7 +7,7 @@
     <groupId>so.tio.workwatch</groupId>
     <artifactId>workwatch</artifactId>
     <version>1.0</version>
-    <name>Work watch timer</name>
+    <name>Work watch</name>
     <packaging>jar</packaging>
 
     <properties>
