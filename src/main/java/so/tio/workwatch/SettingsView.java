@@ -23,7 +23,6 @@ public class SettingsView extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonClose);
-
         // Setting up controls from config
         backgroundColorPanel.setBackground(sm.getBackgroundColor());
         textColorPanel.setBackground(sm.getTextColor());
@@ -85,4 +84,9 @@ public class SettingsView extends JDialog {
         });
     }
 
+    @Override
+    public void pack() {
+        super.pack();
+        this.setMinimumSize(new Dimension(contentPane.getWidth(), contentPane.getHeight()));
+    }
 }
