@@ -69,6 +69,24 @@ public class SettingsManager {
         properties.setProperty("fontSize", String.valueOf(size));
         this.save();
     }
+
+    int getOffsetX(){
+        return Integer.valueOf(properties.getProperty("offsetX", "1"));
+    }
+
+    void setOffsetX(int x){
+        properties.setProperty("offsetX", String.valueOf(x));
+        this.save();
+    }
+
+    int getOffsetY(){
+        return Integer.valueOf(properties.getProperty("offsetY", "10"));
+    }
+
+    void setOffsetY(int y){
+        properties.setProperty("offsetY", String.valueOf(y));
+        this.save();
+    }
     void save(){
         try {
             properties.store(new FileOutputStream(file), null);

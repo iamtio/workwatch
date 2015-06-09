@@ -18,6 +18,8 @@ public class SettingsView extends JDialog {
     private JRadioButton uptimeRadioButton;
     private JRadioButton remainRadioButton;
     private JSpinner fontSizeSpinner;
+    private JSpinner offsetXSpinner;
+    private JSpinner offsetYSpinner;
     private SettingsManager sm = SettingsManagerFacility.getSettingsManager();
 
     public SettingsView() {
@@ -27,8 +29,12 @@ public class SettingsView extends JDialog {
         // Setting up controls from config
         backgroundColorPanel.setBackground(sm.getBackgroundColor());
         textColorPanel.setBackground(sm.getTextColor());
+
         workingHoursSpinner.setValue(sm.getWorkingTime());
         fontSizeSpinner.setValue(sm.getFontSize());
+        offsetXSpinner.setValue(sm.getOffsetX());
+        offsetYSpinner.setValue(sm.getOffsetY());
+
         switch (sm.getMode()){
             case Uptime:
                 uptimeRadioButton.setSelected(true);
@@ -88,6 +94,20 @@ public class SettingsView extends JDialog {
             public void stateChanged(ChangeEvent e) {
                 int newSize = Integer.valueOf(fontSizeSpinner.getValue().toString());
                 sm.setFontSize(newSize);
+            }
+        });
+        offsetXSpinner.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int newX = Integer.valueOf(offsetXSpinner.getValue().toString());
+                sm.setOffsetX(newX);
+            }
+        });
+        offsetYSpinner.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int newY = Integer.valueOf(offsetYSpinner.getValue().toString());
+                sm.setOffsetY(newY);
             }
         });
     }

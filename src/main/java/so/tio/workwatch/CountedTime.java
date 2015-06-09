@@ -28,8 +28,9 @@ public class CountedTime{
         graphics.setColor(sm.getTextColor());
         graphics.setFont(new Font("Arial", Font.PLAIN, sm.getFontSize()));
 
-        graphics.drawString(String.format("%d", this.getHours()), 1, 10);
-        graphics.drawString(String.format("%02d", this.getMinutes()), 1, 10 + sm.getFontSize());
+        graphics.drawString(String.format("%d", this.getHours()), sm.getOffsetX(), sm.getOffsetY());
+        graphics.drawString(String.format("%02d", this.getMinutes()), sm.getOffsetX(),
+                sm.getOffsetY() + sm.getFontSize());
         graphics.dispose();
         return image;
     }
