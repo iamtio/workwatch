@@ -20,6 +20,7 @@ public class SettingsView extends JDialog {
     private JSpinner fontSizeSpinner;
     private JSpinner offsetXSpinner;
     private JSpinner offsetYSpinner;
+    private JRadioButton clockRadioButton;
     private SettingsManager sm = SettingsManagerFacility.getSettingsManager();
 
     public SettingsView() {
@@ -42,6 +43,9 @@ public class SettingsView extends JDialog {
             case Remain:
                 remainRadioButton.setSelected(true);
                 break;
+            case Clock:
+                clockRadioButton.setSelected(true);
+                break;
         }
         // Adding handlers to controls
         buttonClose.addActionListener(new ActionListener() {
@@ -61,6 +65,8 @@ public class SettingsView extends JDialog {
         uptimeRadioButton.addActionListener(modeClicked);
         remainRadioButton.setActionCommand(SettingsManager.Mode.Remain.toString());
         remainRadioButton.addActionListener(modeClicked);
+        clockRadioButton.setActionCommand(SettingsManager.Mode.Clock.toString());
+        clockRadioButton.addActionListener(modeClicked);
 
         textColorButton.addActionListener(new ActionListener() {
             @Override

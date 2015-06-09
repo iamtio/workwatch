@@ -2,6 +2,8 @@ package so.tio.workwatch;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CountedTime{
     private int fullMinutes = 0;
@@ -9,6 +11,11 @@ public class CountedTime{
 
     CountedTime(int minutes){
         this.fullMinutes = minutes;
+    }
+    CountedTime(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        this.fullMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
     }
 
     @Override

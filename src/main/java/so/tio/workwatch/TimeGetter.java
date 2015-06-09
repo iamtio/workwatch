@@ -1,5 +1,6 @@
 package so.tio.workwatch;
 
+import java.util.Date;
 
 public class TimeGetter {
     private static SettingsManager sm = SettingsManagerFacility.getSettingsManager();
@@ -10,6 +11,10 @@ public class TimeGetter {
 
     static CountedTime getRemain(){
         return new CountedTime(sm.getWorkingTime() * 60).minus(getUptime());
+    }
+
+    static CountedTime getTime(){
+        return new CountedTime(new Date());
     }
 }
 

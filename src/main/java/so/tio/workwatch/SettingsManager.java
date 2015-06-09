@@ -7,7 +7,7 @@ import java.util.Properties;
 public class SettingsManager {
     private Properties properties = new Properties();
     private File file;
-    public enum Mode {Uptime, Remain};
+    public enum Mode {Uptime, Remain, Clock};
     SettingsManager(String fileName){
         try {
             file = new File(fileName);

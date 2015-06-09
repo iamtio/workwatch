@@ -14,6 +14,9 @@ public class Main {
                 case Uptime:
                     tm.updateTray(TimeGetter.getUptime());
                     break;
+                case Clock:
+                    tm.updateTray(TimeGetter.getTime());
+                    break;
             }
             Thread.sleep(200);
         }
