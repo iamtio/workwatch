@@ -61,6 +61,14 @@ public class SettingsManager {
         properties.setProperty("workingTime", String.valueOf(hours));
     }
 
+    int getFontSize(){
+        return Integer.valueOf(properties.getProperty("fontSize", "12"));
+    }
+
+    void setFontSize(int size){
+        properties.setProperty("fontSize", String.valueOf(size));
+        this.save();
+    }
     void save(){
         try {
             properties.store(new FileOutputStream(file), null);

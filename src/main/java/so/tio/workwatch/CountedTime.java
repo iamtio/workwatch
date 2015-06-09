@@ -26,10 +26,10 @@ public class CountedTime{
         graphics.fillRect(0, 0, 32, 32);
 
         graphics.setColor(sm.getTextColor());
-        graphics.setFont(new Font("Arial", Font.PLAIN, 12));
+        graphics.setFont(new Font("Arial", Font.PLAIN, sm.getFontSize()));
 
         graphics.drawString(String.format("%d", this.getHours()), 1, 10);
-        graphics.drawString(String.format("%02d", this.getMinutes()), 1, 22);
+        graphics.drawString(String.format("%02d", this.getMinutes()), 1, 10 + sm.getFontSize());
         graphics.dispose();
         return image;
     }

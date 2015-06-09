@@ -17,6 +17,7 @@ public class SettingsView extends JDialog {
     private JPanel textColorPanel;
     private JRadioButton uptimeRadioButton;
     private JRadioButton remainRadioButton;
+    private JSpinner fontSizeSpinner;
     private SettingsManager sm = SettingsManagerFacility.getSettingsManager();
 
     public SettingsView() {
@@ -27,6 +28,7 @@ public class SettingsView extends JDialog {
         backgroundColorPanel.setBackground(sm.getBackgroundColor());
         textColorPanel.setBackground(sm.getTextColor());
         workingHoursSpinner.setValue(sm.getWorkingTime());
+        fontSizeSpinner.setValue(sm.getFontSize());
         switch (sm.getMode()){
             case Uptime:
                 uptimeRadioButton.setSelected(true);
@@ -35,7 +37,6 @@ public class SettingsView extends JDialog {
                 remainRadioButton.setSelected(true);
                 break;
         }
-
         // Adding handlers to controls
         buttonClose.addActionListener(new ActionListener() {
             @Override
@@ -80,6 +81,13 @@ public class SettingsView extends JDialog {
             public void stateChanged(ChangeEvent e) {
                 int newHours = Integer.valueOf(workingHoursSpinner.getValue().toString());
                 sm.setWorkingTime(newHours);
+            }
+        });
+        fontSizeSpinner.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int newSize = Integer.valueOf(fontSizeSpinner.getValue().toString());
+                sm.setFontSize(newSize);
             }
         });
     }
