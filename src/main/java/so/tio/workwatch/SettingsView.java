@@ -21,6 +21,7 @@ public class SettingsView extends JDialog {
     private JSpinner offsetXSpinner;
     private JSpinner offsetYSpinner;
     private JRadioButton clockRadioButton;
+    private JTabbedPane tabbedPane1;
     private SettingsManager sm = SettingsManagerFacility.getSettingsManager();
 
     public SettingsView() {
@@ -121,6 +122,7 @@ public class SettingsView extends JDialog {
     @Override
     public void pack() {
         super.pack();
+        this.setTitle("Work watch settings");
         this.setMinimumSize(new Dimension(contentPane.getWidth(), contentPane.getHeight()));
     }
 }
