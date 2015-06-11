@@ -19,7 +19,7 @@ Settings:
 
     git clone git@github.com:iamtio/workwatch.git
     cd workwatch
-    mvn pacakge
+    mvn package
     
 ## Run
 
