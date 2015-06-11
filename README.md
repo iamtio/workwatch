@@ -15,6 +15,10 @@ Settings:
 ![ww3](https://cloud.githubusercontent.com/assets/597141/8105654/ac43396a-1043-11e5-8507-fa544c5cca3d.png)
 
 # How to
+To build application you need to install:
+- JDK 1.7 or higher (openjdk is fine)
+- Apache Maven 3.0 or higher
+
 ## Build
 
     git clone git@github.com:iamtio/workwatch.git
