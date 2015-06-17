@@ -18,11 +18,11 @@ public class SettingsManager {
         }
     }
 
-    private static String encodeColor(Color col){
+    public static String encodeColor(Color col){
         return String.format("#%06X", (0xFFFFFF & col.getRGB()));
     }
 
-    private static Color decodeColor(String col){
+    public static Color decodeColor(String col){
         return Color.decode(col);
     }
 
