@@ -3,6 +3,13 @@ Work watch is a app for measuring your working time.
 App starts counting time elapsed from PC started and shows it in system tray.
 Also it can show time remaining for end of working day.
 
+# Features:
+- Showing computer uptime in tray
+- Showing work remaining time in tray
+- Showing current time in tray
+- Customizable colors and font size
+- Customizable working hours
+
 # Screenshots
 Tray icon:
 
