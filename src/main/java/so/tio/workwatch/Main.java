@@ -17,6 +17,8 @@ public class Main {
                 case Clock:
                     tm.updateTray(TimeGetter.getTime());
                     break;
+                case Till:
+                    tm.updateTray(TimeGetter.getTill());
             }
             Thread.sleep(200);
         }

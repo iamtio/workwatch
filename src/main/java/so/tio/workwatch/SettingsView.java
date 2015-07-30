@@ -22,6 +22,7 @@ public class SettingsView extends JDialog {
     private JSpinner offsetYSpinner;
     private JRadioButton clockRadioButton;
     private JTabbedPane tabbedPane1;
+    private JRadioButton tillRadioButton;
     private SettingsManager sm = SettingsManagerFacility.getSettingsManager();
 
     public SettingsView() {
@@ -47,6 +48,8 @@ public class SettingsView extends JDialog {
             case Clock:
                 clockRadioButton.setSelected(true);
                 break;
+            case Till:
+                tillRadioButton.setSelected(true);
         }
         // Adding handlers to controls
         buttonClose.addActionListener(new ActionListener() {
@@ -68,6 +71,8 @@ public class SettingsView extends JDialog {
         remainRadioButton.addActionListener(modeClicked);
         clockRadioButton.setActionCommand(SettingsManager.Mode.Clock.toString());
         clockRadioButton.addActionListener(modeClicked);
+        tillRadioButton.setActionCommand(SettingsManager.Mode.Till.toString());
+        tillRadioButton.addActionListener(modeClicked);
 
         textColorButton.addActionListener(new ActionListener() {
             @Override

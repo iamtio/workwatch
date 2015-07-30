@@ -4,9 +4,11 @@ import java.util.Date;
 
 public class TimeGetter {
     private static SettingsManager sm = SettingsManagerFacility.getSettingsManager();
+    private static int getUpMinutes(){
+        return (int)(System.nanoTime() / 1000 / 1000 / 1000 / 60);
+    }
     static CountedTime getUptime(){
-        int minutes = (int)(System.nanoTime() / 1000 / 1000 / 1000 / 60);
-        return new CountedTime(minutes);
+        return new CountedTime(getUpMinutes());
     }
 
     static CountedTime getRemain(){
@@ -15,6 +17,12 @@ public class TimeGetter {
 
     static CountedTime getTime(){
         return new CountedTime(new Date());
+    }
+
+    static CountedTime getTill(){
+        CountedTime now = new CountedTime(new Date());
+        now.setFullMinutes(now.getFullMinutes() - getUpMinutes() + (sm.getWorkingTime() * 60));
+        return now;
     }
 }
 
