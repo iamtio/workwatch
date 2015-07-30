@@ -46,16 +46,16 @@ public class TrayManager {
         menu.add(settings);
         menu.addSeparator();
         menu.add(exit);
-        MenuItem t = new MenuItem("Test");
-        t.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Notification n = new Notification();
-                n.pack();
-                n.setVisible(true);
-            }
-        });
-        menu.add(t);
+//        MenuItem t = new MenuItem("Test");
+//        t.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                Notification n = new Notification();
+//                n.pack();
+//                n.setVisible(true);
+//            }
+//        });
+//        menu.add(t);
         return menu;
     }
 
