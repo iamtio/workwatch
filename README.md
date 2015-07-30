@@ -17,7 +17,7 @@ Tray icon:
 
 Settings:
 
-![ww2](https://cloud.githubusercontent.com/assets/597141/8105652/a353a98e-1043-11e5-917e-8bb09d751bd6.png)
+![ww2](https://cloud.githubusercontent.com/assets/597141/8988116/0f98fcbe-36ed-11e5-806e-36b65378fa6d.png)
 
 ![ww3](https://cloud.githubusercontent.com/assets/597141/8105654/ac43396a-1043-11e5-8507-fa544c5cca3d.png)
 
