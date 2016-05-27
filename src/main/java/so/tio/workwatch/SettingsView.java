@@ -87,7 +87,7 @@ public class SettingsView extends JDialog {
         backgroundColorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Color bgColor = JColorChooser.showDialog(backgroundColorButton, "Choose Background Color", sm.getBackgroundColor());
+                Color bgColor = JColorChooser.showDialog(backgroundColorButton, "Choose background Color", sm.getBackgroundColor());
                 if(bgColor == null)
                     return;
                 sm.setBackgroundColor(bgColor);

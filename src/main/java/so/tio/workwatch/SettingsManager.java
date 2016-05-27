@@ -59,6 +59,7 @@ public class SettingsManager {
 
     void setWorkingTime(int hours){
         properties.setProperty("workingTime", String.valueOf(hours));
+        this.save();
     }
 
     int getFontSize(){
